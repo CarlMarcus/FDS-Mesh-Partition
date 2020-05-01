@@ -261,11 +261,6 @@ public class RecursiveBisectPartition {
             load[i] = mesh.meshGridNum[i]*(1+Math.pow(mesh.borderGridNum[i],(double) 1/3))
                     *(1+3*Math.pow(mesh.meshObstVolume[i],(double) 1/3))/(1+Math.pow(mesh.distFromFire[i],(double) 1/3));
         }
-        /*
-        System.out.println("meshGridNum:"+mesh.meshGridNum[0]+" "+mesh.meshGridNum[1]+" borderGridNum:"+mesh.borderGridNum[0]
-                +" "+mesh.borderGridNum[1]+" meshObstVolume:"+mesh.meshObstVolume[0]+" "+mesh.meshObstVolume[1]+" distFromFire:"+
-                mesh.distFromFire[0]+" "+mesh.distFromFire[1]+" load:"+load[0]+" "+load[1]);
-         */
         return load;
     }
 
@@ -279,11 +274,6 @@ public class RecursiveBisectPartition {
         // 假设这方向有20个网格，那cut只有19个选择，即cut左边是1~19个格子，cut值代表左边有多少格子
         for (int cut=1; cut<mesh.gridNum[direction]; cut++) {
             double[] load = loads(factors(field, mesh, direction, cut));
-            /*
-            System.out.println("gridnum:"+mesh.meshGridNum[0]+" & "+mesh.meshGridNum[1]+" bordernum:"+mesh.borderGridNum[0]+" & "+mesh.borderGridNum[1]
-            +" obst:"+mesh.meshObstVolume[0]+" & "+mesh.meshObstVolume[1]+" firedist:"+mesh.distFromFire[0]+" & "+mesh.distFromFire[1]+" load:"
-            +load[0]+" & "+load[1]);
-            */
             map.put(Math.abs(load[0]-load[1])/(load[0]+load[1]), cut);
         }
         res= map.get(map.firstKey());
